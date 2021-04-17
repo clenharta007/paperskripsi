@@ -1,0 +1,8 @@
+object admin: Tadmin
+  Left = 387
+  Height = 240
+  Top = 166
+  Width = 320
+  Caption = 'admin'
+  LCLVersion = '2.0.10.0'
+end

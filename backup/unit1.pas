@@ -18,6 +18,30 @@ type
     btnRecover: TButton;
     btnColor: TButton;
     btnAdmin: TButton;
+    Label1: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label18: TLabel;
+    Label19: TLabel;
+    Label2: TLabel;
+    Label20: TLabel;
+    Label21: TLabel;
+    Label22: TLabel;
+    Label23: TLabel;
+    Label24: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
     withbg: TCheckBox;
     Image2: TImage;
     Image1: TImage;
@@ -267,8 +291,30 @@ begin
          end;
        end;
      end;
-
-
+     Label1.Caption:=IntToStr(cr1);
+     Label2.Caption:=IntToStr(cr2);
+     Label3.Caption:=IntToStr(cr3);
+     Label4.Caption:=IntToStr(cr4);
+     Label5.Caption:=IntToStr(cr5);
+     Label6.Caption:=IntToStr(cr6);
+     Label7.Caption:=IntToStr(cr7);
+     Label8.Caption:=IntToStr(cr8);
+     Label9.Caption:=IntToStr(cg1);
+     Label10.Caption:=IntToStr(cg2);
+     Label11.Caption:=IntToStr(cg3);
+     Label12.Caption:=IntToStr(cg4);
+     Label13.Caption:=IntToStr(cg5);
+     Label14.Caption:=IntToStr(cg6);
+     Label15.Caption:=IntToStr(cg7);
+     Label16.Caption:=IntToStr(cg8);
+     Label17.Caption:=IntToStr(cb1);
+     Label18.Caption:=IntToStr(cb2);
+     Label19.Caption:=IntToStr(cb3);
+     Label20.Caption:=IntToStr(cb4);
+     Label21.Caption:=IntToStr(cb5);
+     Label22.Caption:=IntToStr(cb6);
+     Label23.Caption:=IntToStr(cb7);
+     Label24.Caption:=IntToStr(cb8);
 end;
 
 end.

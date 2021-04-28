@@ -1,7 +1,7 @@
 object main: Tmain
-  Left = 214
+  Left = 153
   Height = 602
-  Top = 61
+  Top = 119
   Width = 1109
   Caption = 'main'
   ClientHeight = 602
@@ -295,6 +295,15 @@ object main: Tmain
     Width = 40
     Caption = 'Label24'
     ParentColor = False
+  end
+  object btnSearch: TButton
+    Left = 18
+    Height = 25
+    Top = 114
+    Width = 75
+    Caption = 'btnSearch'
+    OnClick = btnSearchClick
+    TabOrder = 7
   end
   object SavePictureDialog1: TSavePictureDialog
     Left = 305

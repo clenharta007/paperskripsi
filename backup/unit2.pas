@@ -240,7 +240,7 @@ begin
      configDBMySQL();
      admin.MySQL57Connection1.Open;
      ATransaction.StartTransaction;
-     admin.MySQL57Connection1.ExecuteDirect('INSERT INTO gemstone_data (gem_name, gem_class) VALUES ('+name+','+kelas+')');
+     admin.MySQL57Connection1.ExecuteDirect('INSERT INTO gemstone_data (gem_name, gem_class) VALUES ("'+name+'","'+kelas+'")');
      id:= admin.MySQL57Connection1.GetInsertID;
      insertNameFeature:= id;
      ATransaction.Commit;
@@ -475,13 +475,12 @@ end;
 procedure Tadmin.btnSaveClick(Sender: TObject);
 var
   idfeatureR,idfeatureG,idfeatureB:Integer;
-  idname,idkelas: String;
+  idname, idkelas: String;
 begin
      idname:='0';
      idfeatureR:=0;
      idfeatureG:=0;
      idfeatureB:=0;
-     idkelas:='0';
      idname:=IntToStr(insertNameFeature(Edit1.Text,ComboBox1.Text));
      idfeatureR:=insertFeatureR(StrToInt(idname),cr1,cr2,cr3,cr4,cr5,cr6,cr7,cr8);
      idfeatureG:=insertfeatureG(StrToInt(idname),cg1,cg2,cg3,cg4,cg5,cg6,cg7,cg8);

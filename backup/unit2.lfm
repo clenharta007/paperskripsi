@@ -1,7 +1,7 @@
 object admin: Tadmin
-  Left = 171
+  Left = 168
   Height = 568
-  Top = 60
+  Top = 113
   Width = 1112
   Caption = 'admin'
   ClientHeight = 568
@@ -66,13 +66,14 @@ object admin: Tadmin
     TabOrder = 3
   end
   object ListView1: TListView
-    Left = 488
+    Left = 448
     Height = 224
     Top = 8
     Width = 648
     Columns = <>
     ParentFont = False
     TabOrder = 8
+    ViewStyle = vsReport
   end
   object Edit1: TEdit
     Left = 208
@@ -80,7 +81,6 @@ object admin: Tadmin
     Top = 10
     Width = 80
     TabOrder = 4
-    Text = 'Edit1'
   end
   object Label1: TLabel
     Left = 125
@@ -126,7 +126,7 @@ object admin: Tadmin
     TabOrder = 7
   end
   object OpenPictureDialog1: TOpenPictureDialog
-    Left = 32
+    Left = 56
     Top = 208
   end
   object MySQL57Connection1: TMySQL57Connection
@@ -134,7 +134,7 @@ object admin: Tadmin
     LoginPrompt = False
     KeepConnection = False
     SkipLibraryVersionCheck = False
-    Left = 136
+    Left = 184
     Top = 208
   end
 end

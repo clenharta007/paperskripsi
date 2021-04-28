@@ -18,6 +18,7 @@ type
     btnRecover: TButton;
     btnColor: TButton;
     btnAdmin: TButton;
+    btnSearch: TButton;
     Label1: TLabel;
     Label10: TLabel;
     Label11: TLabel;
@@ -55,6 +56,7 @@ type
     procedure btnColorClick(Sender: TObject);
     procedure btnLoadClick(Sender: TObject);
     procedure btnRecoverClick(Sender: TObject);
+    procedure btnSearchClick(Sender: TObject);
   private
 
   public
@@ -77,6 +79,175 @@ implementation
 {$R *.lfm}
 
 { Tmain }
+
+function configDBMySQL(): String;
+begin
+     admin.MySQL57Connection1.HostName:='localhost';
+     admin.MySQL57Connection1.UserName:='root';
+     admin.MySQL57Connection1.DatabaseName:='dbgemstone';
+     ATransaction := TSQLTransaction.Create(admin.MySQL57Connection1);
+     admin.MySQL57Connection1.Transaction:=ATransaction;
+end;
+
+procedure showlistfeature();
+var
+  no: Integer;
+begin
+     configDBMySQL();
+     Query:= TSQLQuery.Create(nil);
+     Query.DataBase:=admin.MySQL57Connection1;
+     Query.SQL.Text:='SELECT d.gem_name,d.gem_class,r.r1,r.r2,r.r3,r.r4,r.r5,r.r6,r.r7,r.r8,g.g1,g.g2,g.g3,g.g4,g.g5,g.g6,g.g7,g.g8,b.b1,b.b2,b.b3,b.b4,b.b5,b.b6,b.b7,b.b8 FROM gemstone_data d INNER JOIN gemstone_r r ON d.id = r.gem_id INNER JOIN gemstone_g g ON d.id = g.gem_id INNER JOIN gemstone_b b ON d.id = b.gem_id ORDER BY d.gem_name';
+     Query.Open;
+     lv.Items.Clear;
+     no:=0;
+     while not Query.EOF do begin
+       no:=no+1;
+       with lv.Items.Add do begin
+         Caption:=IntToStr(no);
+         SubItems.Add(Query.FieldByName('gem_name').AsString);
+         SubItems.Add(Query.FieldByName('gem_class').AsString);
+         SubItems.Add(Query.FieldByName('r1').AsString);
+         SubItems.Add(Query.FieldByName('r2').AsString);
+         SubItems.Add(Query.FieldByName('r3').AsString);
+         SubItems.Add(Query.FieldByName('r4').AsString);
+         SubItems.Add(Query.FieldByName('r5').AsString);
+         SubItems.Add(Query.FieldByName('r6').AsString);
+         SubItems.Add(Query.FieldByName('r7').AsString);
+         SubItems.Add(Query.FieldByName('r8').AsString);
+         SubItems.Add(Query.FieldByName('g1').AsString);
+         SubItems.Add(Query.FieldByName('g2').AsString);
+         SubItems.Add(Query.FieldByName('g3').AsString);
+         SubItems.Add(Query.FieldByName('g4').AsString);
+         SubItems.Add(Query.FieldByName('g5').AsString);
+         SubItems.Add(Query.FieldByName('g6').AsString);
+         SubItems.Add(Query.FieldByName('g7').AsString);
+         SubItems.Add(Query.FieldByName('g8').AsString);
+         SubItems.Add(Query.FieldByName('b1').AsString);
+         SubItems.Add(Query.FieldByName('b2').AsString);
+         SubItems.Add(Query.FieldByName('b3').AsString);
+         SubItems.Add(Query.FieldByName('b4').AsString);
+         SubItems.Add(Query.FieldByName('b5').AsString);
+         SubItems.Add(Query.FieldByName('b6').AsString);
+         SubItems.Add(Query.FieldByName('b7').AsString);
+         SubItems.Add(Query.FieldByName('b8').AsString);
+       end;
+       Query.Next;
+     end;
+     Query.Close;
+     Query.Free;
+     ATransaction.Free;
+     admin.MySQL57Connection1.Close;
+end;
+
+procedure tampillist();
+var
+  no,j: Integer;
+  status: String;
+  jarak : double;
+  dbr1,dbr2,dbr3,dbr4,dbr5,dbr6,dbr7,dbr8,dbg1,dbg2,dbg3,dbg4,dbg5,dbg6,dbg7,dbg8,dbb1,dbb2,dbb3,dbb4,dbb5,dbb6,dbb7,dbb8: Float;
+  xr1,xr2,xr3,xr4,xr5,xr6,xr7,xr8,xg1,xg2,xg3,xg4,xg5,xg6,xg7,xg8,xb1,xb2,xb3,xb4,xb5,xb6,xb7,xb8: Float;
+  kr1,kr2,kr3,kr4,kr5,kr6,kr7,kr8,kg1,kg2,kg3,kg4,kg5,kg6,kg7,kg8,kb1,kb2,kb3,kb4,kb5,kb6,kb7,kb8 : double;
+  arrStatus : array[0..1000] of String;
+begin
+  configDBMySQL();
+     Query:=TSQLQuery.Create(nil);
+     Query.DataBase:=admin.MySQL57Connection1;
+     Query.SQL.Text:='SELECT d.gem_name,d.gem_class,r.r1,r.r2,r.r3,r.r4,r.r5,r.r6,r.r7,r.r8,g.g1,g.g2,g.g3,g.g4,g.g5,g.g6,g.g7,g.g8,b.b1,b.b2,b.b3,b.b4,b.b5,b.b6,b.b7,b.b8 FROM gemstone_data d INNER JOIN gemstone_r r ON d.id = r.gem_id INNER JOIN gemstone_g g ON d.id = g.gem_id INNER JOIN gemstone_b b ON d.id = b.gem_id ORDER BY d.gem_name';
+     Query.Open;
+     no:=0;
+     while not Query.EOF do begin
+     status:=Query.FieldByName('gem_name').AsString;
+     dbr1:=Query.FieldByName('r1').AsFloat;
+     dbr2:=Query.FieldByName('r2').AsFloat;
+     dbr3:=Query.FieldByName('r3').AsFloat;
+     dbr4:=Query.FieldByName('r4').AsFloat;
+     dbr5:=Query.FieldByName('r5').AsFloat;
+     dbr6:=Query.FieldByName('r6').AsFloat;
+     dbr7:=Query.FieldByName('r7').AsFloat;
+     dbr8:=Query.FieldByName('r8').AsFloat;
+     dbg1:=Query.FieldByName('g1').AsFloat;
+     dbg2:=Query.FieldByName('g2').AsFloat;
+     dbg3:=Query.FieldByName('g3').AsFloat;
+     dbg4:=Query.FieldByName('g4').AsFloat;
+     dbg5:=Query.FieldByName('g5').AsFloat;
+     dbg6:=Query.FieldByName('g6').AsFloat;
+     dbg7:=Query.FieldByName('g7').AsFloat;
+     dbg8:=Query.FieldByName('g8').AsFloat;
+     dbb1:=Query.FieldByName('b1').AsFloat;
+     dbb2:=Query.FieldByName('b2').AsFloat;
+     dbb3:=Query.FieldByName('b3').AsFloat;
+     dbb4:=Query.FieldByName('b4').AsFloat;
+     dbb5:=Query.FieldByName('b5').AsFloat;
+     dbb6:=Query.FieldByName('b6').AsFloat;
+     dbb7:=Query.FieldByName('b7').AsFloat;
+     dbb8:=Query.FieldByName('b8').AsFloat;
+
+     xr1:=cr1;
+     xr2:=cr2;
+     xr3:=cr3;
+     xr4:=cr4;
+     xr5:=cr5;
+     xr6:=cr6;
+     xr7:=cr7;
+     xr8:=cr8;
+     xg1:=cg1;
+     xg2:=cg2;
+     xg3:=cg3;
+     xg4:=cg4;
+     xg5:=cg5;
+     xg6:=cg6;
+     xg7:=cg7;
+     xg8:=cg8;
+     xb1:=cb1;
+     xb2:=cb2;
+     xb3:=cb3;
+     xb4:=cb4;
+     xb5:=cb5;
+     xb6:=cb6;
+     xb7:=cb7;
+     xb8:=cb8;
+     //knn
+     kr1:=RoundTo(Abs(xr1-dbr1),-5);
+     kr2:=RoundTo(Abs(xr2-dbr2),-5);
+     kr3:=RoundTo(Abs(xr3-dbr3),-5);
+     kr4:=RoundTo(Abs(xr4-dbr4),-5);
+     kr5:=RoundTo(Abs(xr5-dbr5),-5);
+     kr6:=RoundTo(Abs(xr6-dbr6),-5);
+     kr7:=RoundTo(Abs(xr7-dbr7),-5);
+     kr8:=RoundTo(Abs(xr8-dbr8),-5);
+     kg1:=RoundTo(Abs(xg1-dbg1),-5);
+     kg2:=RoundTo(Abs(xg2-dbg2),-5);
+     kg3:=RoundTo(Abs(xg3-dbg3),-5);
+     kg4:=RoundTo(Abs(xg4-dbg4),-5);
+     kg5:=RoundTo(Abs(xg5-dbg5),-5);
+     kg6:=RoundTo(Abs(xg6-dbg6),-5);
+     kg7:=RoundTo(Abs(xg7-dbg7),-5);
+     kg8:=RoundTo(Abs(xg8-dbg8),-5);
+     kb1:=RoundTo(Abs(xb1-dbb1),-5);
+     kb2:=RoundTo(Abs(xb2-dbb2),-5);
+     kb3:=RoundTo(Abs(xb3-dbb3),-5);
+     kb4:=RoundTo(Abs(xb4-dbb4),-5);
+     kb5:=RoundTo(Abs(xb5-dbb5),-5);
+     kb6:=RoundTo(Abs(xb6-dbb6),-5);
+     kb7:=RoundTo(Abs(xb7-dbb7),-5);
+     kb8:=RoundTo(Abs(xb8-dbb8),-5);
+
+     manhattan[no]:= kr1+kr2+kr3+kr4+kr5+kr6+kr7+kr8+kg1+kg2+kg3+kg4+kg5+kg6+kg7+kg8+kb1+kb2+kb3+kb4+kb5+kb6+kb7+kb8;
+     arrStatus[no]:=status;
+     Query.Next;
+     end;
+     jarak:=300;
+     for j:=1 to no do begin
+       if manhattan[j]<jarak then begin
+         jarak:=manhattan[j];
+         admin.Label3.Caption:=arrStatus[j];
+       end;
+     end;
+     Query.Close;
+     Query.Free;
+     ATransaction.Free;
+     admin.MySQL57Connection1.Close;
+end;
 
 procedure Tmain.btnLoadClick(Sender: TObject);
 begin
@@ -102,6 +273,12 @@ begin
           Image1.Canvas.Pixels[x,y]:= RGB(bitmapR[x,y],bitmapG[x,y],bitmapB[x,y]);
       end;
   end;
+end;
+
+procedure Tmain.btnSearchClick(Sender: TObject);
+begin
+  tampillist();
+  showlistfeature();
 end;
 
 procedure Tmain.btnBinerClick(Sender: TObject);

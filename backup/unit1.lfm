@@ -1,7 +1,7 @@
 object main: Tmain
-  Left = 186
+  Left = 214
   Height = 602
-  Top = 219
+  Top = 61
   Width = 1109
   Caption = 'main'
   ClientHeight = 602
